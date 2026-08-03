@@ -8,7 +8,8 @@ on:
 
 jobs:
   test-and-build:
-    runs-on: ubuntu-latest
+    # lxn/walk is Windows-only; run tests on a Windows runner.
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,15 +19,13 @@ jobs:
         with:
           go-version-file: go.mod
 
-      # walk is Windows-only; compile/test as GOOS=windows even on Linux runners.
       - name: Test
         run: go test ./...
         env:
           CGO_ENABLED: "0"
-          GOOS: windows
-          GOARCH: amd64
 
       - name: Build Windows exe
+        shell: bash
         run: |
           chmod +x ./build.sh
           ./build.sh
