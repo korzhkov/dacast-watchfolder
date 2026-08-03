@@ -1,0 +1,9 @@
+/dacast-watchfolder.exe
+/dacast-watchfolder-debug.exe
+*.exe
+.idea/
+.vscode/
+*.db
+*.log
+run-err.txt
+run-out.txt
