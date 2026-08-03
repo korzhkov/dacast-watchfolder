@@ -2,6 +2,10 @@
 
 Windows tray app that watches a local folder and uploads files to Dacast via multipart upload. Single portable `.exe`, no installer.
 
+## Download
+
+Get the latest `dacast-watchfolder.exe` from [Releases](https://github.com/korzhkov/dacast-watchfolder/releases).
+
 ## Build
 
 Requires Go 1.22+ (no CGO). The Windows Common Controls v6 manifest is embedded via `cmd/watchfolder/rsrc.syso` (regenerate with `rsrc` if you change `app.manifest`):
