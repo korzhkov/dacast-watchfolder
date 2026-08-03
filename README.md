@@ -1,23 +1,30 @@
 # Dacast Watchfolder
 
-Windows tray app that watches a local folder and uploads files to Dacast via multipart upload. Single portable `.exe`, no installer.
+Windows tray app that watches a local folder and uploads new files to Dacast via multipart upload. One portable `.exe`, no installer.
+
+### What it does
+
+- Watches a folder you choose and uploads every new file to Dacast as VOD
+- On startup, also queues files already in the folder that were not uploaded yet
+- Survives short network drops: retries the failed chunk and continues the same multipart upload
+- Survives app restart / crash mid-upload: resumes from already uploaded parts (progress is stored locally)
+- Leaves files on disk after a successful upload; the same file is not uploaded again unless it changes
+- Runs in the system tray; watching starts automatically if API key and folder are already saved
 
 ## Usage
 
 1. Run `dacast-watchfolder.exe`
-2. Enter Dacast API key and choose a watch folder
-3. Settings are saved automatically when you start; watching auto-starts if configured
-4. Closing the window hides to the system tray (right-click tray icon: Open / Start-Stop / Quit)
+2. Enter your Dacast API key and choose a watch folder
+3. Settings are saved when you start; next launches auto-start watching if configured
+4. Closing the window hides to the tray (right-click: Open / Start-Stop / Quit)
 
-Data under `%AppData%\DacastWatchfolder\`:
+Local data lives in `%AppData%\DacastWatchfolder\`:
 
 | File | Purpose |
 |------|---------|
-| `config.json` | API key + watch folder |
-| `state.db` | Upload status + part ETags (resume after crash / network blips) |
+| `config.json` | API key and watch folder |
+| `state.db` | Upload status and part ETags (needed for resume) |
 | `app.log` | Process log |
-
-On start, files already in the folder are queued. Successful uploads leave files in place and skip them later when path + size + mtime match.
 
 ## Download
 
