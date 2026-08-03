@@ -22,6 +22,10 @@ jobs:
 
       - name: Test
         run: go test ./...
+        env:
+          CGO_ENABLED: "0"
+          GOOS: windows
+          GOARCH: amd64
 
       - name: Build Windows exe
         run: |
